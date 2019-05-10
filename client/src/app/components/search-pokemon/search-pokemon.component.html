@@ -1,0 +1,17 @@
+<div fxLayout="row" fxLayoutAlign="center">
+  <div fxLayoutAlign="space-around center">
+    <form (ngSubmit)="submitPokemon()">
+      <mat-form-field>
+        <input matInput placeholder="Pokemon ou Id" aria-label="Pokemon" [matAutocomplete]="auto" [formControl]="pokemonCtrl">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let pokemon of filteredPokemons | async" [value]="pokemon.name">
+            <span>{{pokemon.id+' | '+pokemon.name}}</span>
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <button type="submit" mat-button>valider</button>
+    </form>
+  </div>
+</div>
+
+
