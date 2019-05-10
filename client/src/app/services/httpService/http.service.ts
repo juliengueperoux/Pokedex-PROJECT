@@ -26,7 +26,6 @@ export class HttpService {
     return this.http.get(this.Api+"pokemon/?limit=800")
   }
   getPokemonDescription(url){
-
     return this.http.get(url)
   }
 

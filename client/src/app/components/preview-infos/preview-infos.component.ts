@@ -36,4 +36,11 @@ export class PreviewInfosComponent implements OnInit {
     })
   }
 
+  barColor(value){
+    if (value < 50) return "superLowStat"
+    if (value < 100) return "lowStat"
+    if (value < 175) return "middleStat"
+    if (value >=175) return "highStat"
+  }
+
 }

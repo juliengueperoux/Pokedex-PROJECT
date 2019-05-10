@@ -1,38 +1,35 @@
-<div fxLayout="row" fxLayout.lt-md="column" fxLayoutAlign="center">
-  <div fxLayoutAlign="space-around center">
-    <mat-card fxFlex='80'>
-      <div *ngIf="selectedPokemon">
-        <div fxLayout="row" fxLayout.xs="column">
-          <div fxFlex='40'>
-            <mat-card-header>
-              <mat-card-title>#{{selectedPokemon.id}} {{selectedPokemon.name}}</mat-card-title>
-              <mat-card-subtitle>Types : {{selectedPokemon.type}}</mat-card-subtitle>
-            </mat-card-header>
-            <img mat-card-image [src]="selectedPokemon.image">
-            <mat-card-content>
-              <h2>Description</h2>
-              {{selectedPokemon.description}}
-            </mat-card-content>
-          </div>
-          <div fxFlex.gt-xs='20'></div>
-          <mat-card-content fxFlex='40'>
-            <mat-list>
-              <h2>Stats</h2>
-              <div fxLayout="row" *ngFor="let stat of selectedPokemon.stats">
-                <mat-list-item>
-                  <p fxFlex="50">{{stat.name}} : {{stat.value}}</p>
-                  <mat-progress-bar fxFlex="50" mode="determinate" [value]="(stat.value/255)*100"></mat-progress-bar>
-                </mat-list-item>
-              </div>
-            </mat-list>
-          </mat-card-content>
-        </div>
-      </div>
-      <div *ngIf="!selectedPokemon">
+<mat-card fxFlex='80'>
+  <div *ngIf="selectedPokemon">
+    <div fxLayout="row" fxLayout.xs="column">
+      <div fxFlex='60'>
         <mat-card-header>
-          <mat-card-title>Veuillez Choisir un Pokémon</mat-card-title>
+          <mat-card-title>#{{selectedPokemon.id}} {{selectedPokemon.name}}</mat-card-title>
+          <mat-card-subtitle>Types : {{selectedPokemon.type}}</mat-card-subtitle>
         </mat-card-header>
+        <img mat-card-image style='max-width:200px;  max-height:200px;' [src]="selectedPokemon.image">
+        <mat-card-content>
+          <h2>Description</h2>
+          {{selectedPokemon.description}}
+        </mat-card-content>
       </div>
-    </mat-card>
+      <mat-card-content fxFlex='40'>
+        <mat-list>
+          <h2>Stats</h2>
+          <div fxLayout="row" *ngFor="let stat of selectedPokemon.stats">
+            <mat-list-item>
+              <p fxFlex="50">{{stat.name}} :</p>
+              <p fxFlex="10" style="text-align:right">{{stat.value}}</p>
+              <mat-progress-bar fxFlex="40" style='height: 30%' mode="determinate" [value]="(stat.value/255)*100"
+                [ngClass]="barColor(stat.value)"></mat-progress-bar>
+            </mat-list-item>
+          </div>
+        </mat-list>
+      </mat-card-content>
+    </div>
   </div>
-</div>
+  <div *ngIf="!selectedPokemon">
+    <mat-card-header>
+      <mat-card-title>Veuillez Choisir un Pokémon</mat-card-title>
+    </mat-card-header>
+  </div>
+</mat-card>

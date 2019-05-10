@@ -9,6 +9,22 @@ body {
     margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-.error-snackbar{
+.error-snackbar {
     background: rgb(179, 57, 57);
+}
+
+.superLowStat .mat-progress-bar-fill::after{
+    background-color: darkred !important
+}
+
+.lowStat .mat-progress-bar-fill::after{
+    background-color: darkorange !important
+}
+
+.middleStat .mat-progress-bar-fill::after{
+    background-color: darkgreen !important
+}
+
+.highStat .mat-progress-bar-fill::after{
+    background-color: dodgerblue !important 
 }
