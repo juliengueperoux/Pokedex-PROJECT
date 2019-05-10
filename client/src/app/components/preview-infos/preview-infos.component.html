@@ -6,7 +6,10 @@
           <mat-card-title>#{{selectedPokemon.id}} {{selectedPokemon.name}}</mat-card-title>
           <mat-card-subtitle>Types : {{selectedPokemon.type}}</mat-card-subtitle>
         </mat-card-header>
-        <img mat-card-image style='max-width:200px;  max-height:200px;' [src]="selectedPokemon.image">
+        <img mat-card-image style='max-width:200px;  max-height:200px;' [src]="selectedPokemon.images[indexImage]">
+        <button mat-icon-button (click)="changeImage()">
+            <mat-icon>loop</mat-icon>
+          </button>
         <mat-card-content>
           <h2>Description</h2>
           {{selectedPokemon.description}}

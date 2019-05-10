@@ -12,6 +12,7 @@ import {UtilsService} from '../../services/utilsService/utils.service';
 })
 export class PreviewInfosComponent implements OnInit {
 
+  indexImage:number=0
   selectedPokemon : Pokemon
   constructor(private pokemonService: PokemonService,private httpService: HttpService,private _utils: UtilsService) { }
 
@@ -26,7 +27,7 @@ export class PreviewInfosComponent implements OnInit {
         this.selectedPokemon.abilities=pokemonDatas.abilities.map((abilitie)=> abilitie.name)
         this.selectedPokemon.stats = pokemonDatas.stats.map((stat)=> new Stat(stat.stat.name,stat.base_stat))
         this.selectedPokemon.type = pokemonDatas.types.map((type)=>type.type.name)
-        this.selectedPokemon.image = pokemonDatas.sprites.front_default
+        this.selectedPokemon.images = [pokemonDatas.sprites.front_default,pokemonDatas.sprites.back_default]
         this.httpService.getPokemonDescription(pokemonDatas.species.url).subscribe((pokemonSpecies:any)=>{
           this.selectedPokemon.description= pokemonSpecies.flavor_text_entries.filter(flavorTextEntry => flavorTextEntry.language.name === "en")[0].flavor_text;
         })
@@ -34,6 +35,10 @@ export class PreviewInfosComponent implements OnInit {
       },error => this._utils.openSnackBar("identifiant ou nom du pokemon incorrect","Ok","error-snackbar"))
     }
     })
+  }
+
+  changeImage(){
+    this.indexImage==1 ? this.indexImage = 0 : this.indexImage = 1
   }
 
   barColor(value){

@@ -20,6 +20,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatListModule} from '@angular/material/list';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     SearchPokemonComponent
   ],
   imports: [
+    MatIconModule,  
     MatSnackBarModule,
     MatProgressBarModule,
     MatListModule,
