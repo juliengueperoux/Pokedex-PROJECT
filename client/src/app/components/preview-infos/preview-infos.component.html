@@ -1,15 +1,17 @@
 <mat-card fxFlex='80'>
   <div *ngIf="selectedPokemon">
-    <div fxLayout="row" fxLayout.xs="column">
+    <div fxLayout="row" fxLayout.lt-md="column">
       <div fxFlex='60'>
         <mat-card-header>
           <mat-card-title>#{{selectedPokemon.id}} {{selectedPokemon.name}}</mat-card-title>
           <mat-card-subtitle>Types : {{selectedPokemon.type}}</mat-card-subtitle>
         </mat-card-header>
-        <img mat-card-image style='max-width:200px;  max-height:200px;' [src]="selectedPokemon.images[indexImage]">
+        <mat-card-content fxLayout="column" fxLayoutAlign="center center">
+        <p><img style="zoom: 2" [src]="selectedPokemon.images[indexImage]"></p>
         <button mat-icon-button (click)="changeImage()">
             <mat-icon>loop</mat-icon>
           </button>
+        </mat-card-content>
         <mat-card-content>
           <h2>Description</h2>
           {{selectedPokemon.description}}
