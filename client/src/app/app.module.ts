@@ -29,7 +29,7 @@ import {MatIconModule} from '@angular/material/icon';
     SearchPokemonComponent
   ],
   imports: [
-    MatIconModule,  
+    MatIconModule,
     MatSnackBarModule,
     MatProgressBarModule,
     MatListModule,

@@ -28,6 +28,7 @@ export class PreviewInfosComponent implements OnInit {
         this.selectedPokemon.stats = pokemonDatas.stats.map((stat)=> new Stat(stat.stat.name,stat.base_stat))
         this.selectedPokemon.type = pokemonDatas.types.map((type)=>type.type.name)
         this.selectedPokemon.images = [pokemonDatas.sprites.front_default,pokemonDatas.sprites.back_default]
+        this.selectedPokemon.images= this.selectedPokemon.images.filter((image)=> image!=null)
         this.httpService.getPokemonDescription(pokemonDatas.species.url).subscribe((pokemonSpecies:any)=>{
           this.selectedPokemon.description= pokemonSpecies.flavor_text_entries.filter(flavorTextEntry => flavorTextEntry.language.name === "en")[0].flavor_text;
         })
@@ -38,7 +39,7 @@ export class PreviewInfosComponent implements OnInit {
   }
 
   changeImage(){
-    this.indexImage==1 ? this.indexImage = 0 : this.indexImage = 1
+    this.indexImage== (this.selectedPokemon.images.length-1) ? this.indexImage = 0 : this.indexImage = this.indexImage+1
   }
 
   barColor(value){

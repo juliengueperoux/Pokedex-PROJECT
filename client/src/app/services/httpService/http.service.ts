@@ -23,7 +23,7 @@ export class HttpService {
     return this.http.get(this.Api+"pokemon//?offset="+idBegin+"&limit="+number)
   }
   getAllPokemons(){
-    return this.http.get(this.Api+"pokemon/?limit=800")
+    return this.http.get(this.Api+"pokemon/?limit=10000")
   }
   getPokemonDescription(url){
     return this.http.get(url)
