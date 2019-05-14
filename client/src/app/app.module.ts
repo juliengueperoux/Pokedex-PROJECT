@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import {MatFormFieldModule} from '@angular/material/form-field';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './components/app/app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -21,14 +21,23 @@ import {MatListModule} from '@angular/material/list';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatIconModule} from '@angular/material/icon';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { SearchComponent } from './components/search/search.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import { CreatePokemonComponent } from './components/create-pokemon/create-pokemon.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PreviewInfosComponent,
-    SearchPokemonComponent
+    SearchPokemonComponent,
+    SidebarComponent,
+    SearchComponent,
+    CreatePokemonComponent
   ],
   imports: [
+    MatFormFieldModule,
+    MatSidenavModule,
     MatIconModule,
     MatSnackBarModule,
     MatProgressBarModule,

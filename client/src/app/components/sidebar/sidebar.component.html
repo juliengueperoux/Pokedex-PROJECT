@@ -1,0 +1,30 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="true"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="!(isHandset$ | async)">
+    <a [routerLink]="'/search'" style="text-decoration: none;"><mat-toolbar><img width="40" height="40" style="margin-right: 25px;" src="../../../assets/imagePokedex.png">Pokedex</mat-toolbar></a>
+
+    <mat-nav-list>
+      <mat-divider></mat-divider>
+      <a mat-list-item  [routerLink]="'/search'">
+        <mat-icon style="margin-right: 5px">search</mat-icon>
+        Search Pokemon
+      </a>
+      <mat-divider></mat-divider>
+      <a mat-list-item [routerLink]="'/create'" >
+        <mat-icon style="margin-right: 5px">create</mat-icon>
+        Create Pokemon
+      </a>
+    </mat-nav-list>
+
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="sc.first.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </mat-toolbar>
+    <ng-content>
+    </ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>

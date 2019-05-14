@@ -1,13 +1,18 @@
-<mat-card fxFlex='80'>
+<div fxLayout='column' fxFlex='80' >
+  <div fxLayout="row">
+        <button mat-raised-button fxFlex='30' fxFlex.lt-md="55" *ngIf="selectedPokemon" (click)="savePokemon()" color="primary">Enregister ce Pokemon ?</button>
+      </div>
+        <mat-card id="pokemonCard">
   <div *ngIf="selectedPokemon">
     <div fxLayout="row" fxLayout.lt-md="column">
       <div fxFlex='60'>
         <mat-card-header>
-          <mat-card-title>#{{selectedPokemon.id}} {{selectedPokemon.name}}</mat-card-title>
+          <mat-card-title *ngIf="selectedPokemon.id">#{{selectedPokemon.id}} {{selectedPokemon.name}}</mat-card-title>
+          <mat-card-title *ngIf="!selectedPokemon.id">{{selectedPokemon.name}}</mat-card-title>
           <mat-card-subtitle>Types : {{selectedPokemon.type}}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content *ngIf="selectedPokemon.images.length>0" fxLayout="column" fxLayoutAlign="center center">
-        <p><img style="zoom: 2" [src]="selectedPokemon.images[indexImage]"></p>
+        <p><img style="zoom: 2; max-width: 100%; max-height: 200px;"  [src]="selectedPokemon.images[indexImage]"></p>
         <button mat-icon-button *ngIf="selectedPokemon.images.length>1" (click)="changeImage()">
             <mat-icon>loop</mat-icon>
           </button>
@@ -41,3 +46,4 @@
     </mat-card-header>
   </div>
 </mat-card>
+</div>

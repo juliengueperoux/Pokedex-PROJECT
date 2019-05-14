@@ -1,0 +1,58 @@
+<h2 fxLayoutAlign="center">Create your Pokemon !</h2>
+<div fxLayout="column" fxLayoutAlign="center" style="margin-top:4%" fxLayoutGap="4%">
+  <div fxLayoutAlign="center">
+    <form [formGroup]="pokemonGroup" fxLayout="column" fxFlex='70' (ngSubmit)="createPokemon()">
+      <div fxLayout='row' fxLayoutAlign="space-between">
+        <mat-form-field fxFlex="45">
+          <input matInput required formControlName="inputNameControl" placeholder="Name">
+        </mat-form-field>
+
+        <mat-form-field fxFlex="45">
+          <textarea matInput required formControlName="inputDescriptionControl" placeholder="Description"></textarea>
+        </mat-form-field>
+      </div>
+
+      <mat-form-field fxLayout='row'>
+        <input matInput required formControlName="inputTypesControl" placeholder="Types">
+      </mat-form-field>
+
+      <div fxLayout='row' fxLayout.xs="column" fxLayoutAlign="space-between">
+        <mat-form-field fxFlex="25">
+          <input matInput required formControlName="inputHpControl" type="number" placeholder="hp">
+        </mat-form-field>
+
+        <mat-form-field fxFlex="25">
+          <input matInput required formControlName="inputAttackControl" type="number" placeholder="attack">
+        </mat-form-field>
+
+        <mat-form-field fxFlex="25">
+          <input matInput required formControlName="inputDefenseControl" type="number" placeholder="defense">
+        </mat-form-field>
+      </div>
+      <div fxLayout='row' fxLayout.xs="column" fxLayoutAlign="space-between">
+        <mat-form-field fxFlex="25">
+          <input matInput required formControlName="inputSpeedControl" type="number" placeholder="speed">
+        </mat-form-field>
+
+        <mat-form-field fxFlex="25">
+          <input matInput required formControlName="inputSpeDefenseControl" type="number" placeholder="special-defense">
+        </mat-form-field>
+
+        <mat-form-field fxFlex="25">
+          <input matInput required formControlName="inputSpeAttackControl" type="number" placeholder="special-attack">
+        </mat-form-field>
+      </div>
+      <div fxLayout='row'>
+          <button mat-raised-button fxFlex='50' (click)="openFileBrowser()" type="button">
+              Select File to Upload
+          </button>  
+      </div>
+      <div fxLayout='row' fxLayoutAlign="center">
+      <button fxFlex="25" mat-raised-button type="submit">Go !</button>
+    </div>
+    </form>
+  </div>
+    <app-preview-infos *ngIf="filledCustompokemon" fxFlex="70" fxLayoutAlign="center" [defaultpokemon]='customPokemon'>
+    </app-preview-infos>
+</div>
+<input hidden type="file" id="fileInput" (change)="uploadImagePokemon($event)" accept=".png, .jpg, .jpeg">
