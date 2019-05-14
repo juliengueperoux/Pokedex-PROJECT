@@ -42,17 +42,24 @@
           <input matInput required formControlName="inputSpeAttackControl" type="number" placeholder="special-attack">
         </mat-form-field>
       </div>
-      <div fxLayout='row'>
+      <div  fxLayoutAlign="space-between" fxLayout="column" fxLayoutGap="4%">
+        <div fxLayout="row">
           <button mat-raised-button fxFlex='50' (click)="openFileBrowser()" type="button">
-              Select File to Upload
+              Select Image to Upload
           </button>  
+          </div>
+          <div fxLayout="column" fxLayoutAlign="center"  fxLayoutGap="4%">
+              <div fxLayout="row">
+      <button fxFlex="40" mat-raised-button (click)="resetCustomPokemon()" type="button">Reset / Create New Custom Pokemon</button>
       </div>
-      <div fxLayout='row' fxLayoutAlign="center">
+      <div fxLayout="row" fxLayoutAlign="center">
       <button fxFlex="25" mat-raised-button type="submit">Go !</button>
+    </div>
+    </div>
     </div>
     </form>
   </div>
-    <app-preview-infos *ngIf="filledCustompokemon" fxFlex="70" fxLayoutAlign="center" [defaultpokemon]='customPokemon'>
+    <app-preview-infos *ngIf="filledCustomPokemon" fxFlex="70" fxLayoutAlign="center" [defaultpokemon]='customPokemon'>
     </app-preview-infos>
 </div>
 <input hidden type="file" id="fileInput" (change)="uploadImagePokemon($event)" accept=".png, .jpg, .jpeg">

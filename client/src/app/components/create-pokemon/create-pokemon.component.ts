@@ -3,6 +3,7 @@ import { UtilsService } from 'src/app/services/utilsService/utils.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Pokemon } from 'src/app/models/pokemon';
 import { Stat } from 'src/app/models/stat';
+import { FindValueSubscriber } from 'rxjs/internal/operators/find';
 
 @Component({
   selector: 'app-create-pokemon',
@@ -11,13 +12,13 @@ import { Stat } from 'src/app/models/stat';
 })
 export class CreatePokemonComponent implements OnInit {
   imageUrl: any[];
-  filledCustompokemon : boolean;
+  filledCustomPokemon : boolean;
   pokemonGroup: FormGroup;
   customPokemon : Pokemon;
   constructor(private _utils: UtilsService, private _formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    this.filledCustompokemon = false
+    this.filledCustomPokemon = false
     this.imageUrl=[]
     this.pokemonGroup = this._formBuilder.group({
       inputNameControl: [
@@ -105,7 +106,7 @@ export class CreatePokemonComponent implements OnInit {
     }
   }
   createPokemon():void{
-    console.log("dans le submit")
+    console.log("subbbmit "+this.pokemonGroup.valid)
     if(this.pokemonGroup.valid){
       if(this.imageUrl.length>0){
         this.customPokemon = new Pokemon()
@@ -117,7 +118,7 @@ export class CreatePokemonComponent implements OnInit {
             this.customPokemon.images = this.imageUrl
             this.customPokemon.description = this.pokemonGroup.get('inputDescriptionControl').value
 
-      this.filledCustompokemon = true
+      this.filledCustomPokemon = true
       }
       else{
         this._utils.openSnackBar("Formulaire invalide", "Ok", "error-snackbar")
@@ -126,6 +127,11 @@ export class CreatePokemonComponent implements OnInit {
       else{
         this._utils.openSnackBar("Formulaire invalide", "Ok", "error-snackbar")
       }
+    }
+
+    resetCustomPokemon(){
+      this.filledCustomPokemon = false
+      this.pokemonGroup.reset()
     }
 
     openFileBrowser(){ 
