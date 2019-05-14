@@ -131,6 +131,7 @@ export class CreatePokemonComponent implements OnInit {
 
     resetCustomPokemon(){
       this.filledCustomPokemon = false
+      this.imageUrl = []
       this.pokemonGroup.reset()
     }
 
