@@ -25,7 +25,7 @@ export class PreviewInfosComponent implements OnInit {
           if (pokemonDatas) {
             this.selectedPokemon.id = pokemonDatas.id
             this.selectedPokemon.name = pokemonDatas.name
-            this.selectedPokemon.abilities = pokemonDatas.abilities.map((abilitie) => abilitie.name)
+            this.selectedPokemon.abilities = pokemonDatas.abilities.map((ability) => ability.ability.name)
             this.selectedPokemon.stats = pokemonDatas.stats.map((stat) => new Stat(stat.stat.name, stat.base_stat))
             this.selectedPokemon.type = pokemonDatas.types.map((type) => type.type.name)
             this.selectedPokemon.images = [pokemonDatas.sprites.front_default, pokemonDatas.sprites.back_default]

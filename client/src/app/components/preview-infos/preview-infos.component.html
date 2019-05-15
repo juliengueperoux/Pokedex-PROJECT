@@ -24,6 +24,10 @@
           <h2>Description</h2>
           <p>{{selectedPokemon.description}}</p>
         </mat-card-content>
+        <mat-card-content *ngIf='selectedPokemon.abilities.length>0'>
+          <h2>Abilites</h2>
+          <p>{{selectedPokemon.abilities}}</p>
+        </mat-card-content>
       </div>
       <mat-card-content fxFlex='40'>
         <mat-list>

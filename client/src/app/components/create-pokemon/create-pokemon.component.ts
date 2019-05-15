@@ -21,6 +21,7 @@ export class CreatePokemonComponent implements OnInit {
     this.filledCustomPokemon = false
     this.imageUrl=[]
     this.pokemonGroup = this._formBuilder.group({
+      inputAbilitiesControl:[],
       inputNameControl: [
         '',
         Validators.compose([
@@ -112,7 +113,7 @@ export class CreatePokemonComponent implements OnInit {
         this.customPokemon = new Pokemon()
         this.customPokemon.id = null
             this.customPokemon.name = this.pokemonGroup.get('inputNameControl').value
-            this.customPokemon.abilities = null
+            this.customPokemon.abilities = this.pokemonGroup.get('inputAbilitiesControl').value
             this.customPokemon.stats = [new Stat("speed",this.pokemonGroup.get('inputSpeedControl').value),new Stat("hp",this.pokemonGroup.get('inputHpControl').value),new Stat("attack",this.pokemonGroup.get('inputAttackControl').value),new Stat("defense",this.pokemonGroup.get('inputDefenseControl').value),new Stat("special-defense",this.pokemonGroup.get('inputSpeDefenseControl').value),new Stat("special-attack",this.pokemonGroup.get('inputSpeAttackControl').value)]
             this.customPokemon.type = this.pokemonGroup.get('inputTypesControl').value
             this.customPokemon.images = this.imageUrl
