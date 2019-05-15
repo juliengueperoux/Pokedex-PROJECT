@@ -1,7 +1,8 @@
 <h2 fxLayoutAlign="center">Create your Pokemon !</h2>
 <div fxLayout="column" fxLayoutAlign="center" style="margin-top:4%" fxLayoutGap="4%">
   <div fxLayoutAlign="center">
-    <form [formGroup]="pokemonGroup" fxLayout="column" fxFlex='70' (ngSubmit)="createPokemon()">
+    <mat-card fxFlex='70'>
+    <form [formGroup]="pokemonGroup" fxLayout="column" (ngSubmit)="createPokemon()">
       <div fxLayout='row' fxLayoutAlign="space-between">
         <mat-form-field fxFlex="45">
           <input matInput required formControlName="inputNameControl" placeholder="Name">
@@ -63,6 +64,7 @@
         </div>
       </div>
     </form>
+  </mat-card>
   </div>
   <app-preview-infos *ngIf="filledCustomPokemon" fxFlex="70" fxLayoutAlign="center" [defaultpokemon]='customPokemon'>
   </app-preview-infos>
