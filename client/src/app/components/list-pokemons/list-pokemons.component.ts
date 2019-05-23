@@ -13,9 +13,10 @@ import { TouchSequence } from 'selenium-webdriver';
   styleUrls: ['./list-pokemons.component.css']
 })
 export class ListPokemonsComponent implements OnInit {
+  numberPokemons:number = 964
   selectedPokemon : Pokemon = new Pokemon()
   listPokemons: Pokemon[] = []
-  offSet: number = 20
+  offset: number = 20
   constructor(private httpService: HttpService, private dialog: MatDialog) { }
 
   ngOnInit() {
@@ -27,6 +28,7 @@ export class ListPokemonsComponent implements OnInit {
   async getPokemons(min, number) {
     await this.httpService.getPokemonInRange(min, number).subscribe((pokemonUrls: any) => {
       const urlList: any[] = []
+      this.numberPokemons = pokemonUrls.count
       pokemonUrls.results.forEach((pokemonData) => {
         urlList.push(this.httpService.getPokemonByUrl(pokemonData.url))
       })
@@ -50,8 +52,8 @@ export class ListPokemonsComponent implements OnInit {
   }
 
   addPokemons(){
-    this.getPokemons(this.offSet, this.offSet+20)
-    this.offSet+=20;
+    this.getPokemons(this.offset, this.offset+20)
+    this.offset+=20;
   }
   
   openCardDetails(pokemon){
