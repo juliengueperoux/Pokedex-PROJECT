@@ -1,0 +1,10 @@
+<div fxLayout="column">
+  <div fxLayout="row wrap" fxLayoutAlign="space-around">
+    <app-preview-card *ngFor="let pokemon of listPokemons" [id]="pokemon.id" [name]="pokemon.name"
+      [image]="pokemon.images[0]" [types]="pokemon.types" fxFlex.xs="90" fxFlex.sm="45" fxFlex.gt-sm="30"
+      style="margin-bottom: 2%" (click)="openCardDetails(pokemon)"></app-preview-card>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="center" style="margin-bottom: 2%">
+    <button mat-raised-button color="primary" (click)="addPokemons()">Load More</button>
+  </div>
+</div>

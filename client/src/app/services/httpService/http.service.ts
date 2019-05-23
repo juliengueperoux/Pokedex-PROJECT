@@ -28,6 +28,12 @@ export class HttpService {
   getPokemonDescription(url){
     return this.http.get(url)
   }
+  getPokemonByUrl(url){
+    return this.http.get(url)
+  }
+  getPokemonInRange(min,number){
+    return this.http.get(this.Api+"pokemon/?offset="+min+"&?limit="+number)
+  }
 
   
 }

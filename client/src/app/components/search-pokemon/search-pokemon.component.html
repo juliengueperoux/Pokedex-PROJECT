@@ -1,6 +1,7 @@
 <form (ngSubmit)="submitPokemon()">
-  <mat-form-field>
-    <input matInput placeholder="Pokemon ou Id" aria-label="Pokemon" [matAutocomplete]="auto"
+    <div fxLayout='row' fxLayoutAlign="space-between center">
+  <mat-form-field fxFlex="60">
+        <input matInput placeholder="Pokemon ou Id" aria-label="Pokemon" [matAutocomplete]="auto"
       [formControl]="pokemonCtrl">
     <mat-autocomplete #auto="matAutocomplete">
       <mat-option *ngFor="let pokemon of filteredPokemons | async" [value]="pokemon.name">
@@ -8,5 +9,6 @@
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
-  <button type="submit" mat-raised-button>valider</button>
+  <button fxFlex="30" type="submit" mat-raised-button>validate</button>
+</div>
 </form>

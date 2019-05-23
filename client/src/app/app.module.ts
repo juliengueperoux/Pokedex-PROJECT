@@ -25,6 +25,10 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { SearchComponent } from './components/search/search.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { CreatePokemonComponent } from './components/create-pokemon/create-pokemon.component';
+import { PreviewCardComponent } from './components/preview-card/preview-card.component';
+import { ListPokemonsComponent } from './components/list-pokemons/list-pokemons.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { PokemonDialogComponent } from './components/pokemon-dialog/pokemon-dialog.component';
 
 @NgModule({
   declarations: [
@@ -33,9 +37,13 @@ import { CreatePokemonComponent } from './components/create-pokemon/create-pokem
     SearchPokemonComponent,
     SidebarComponent,
     SearchComponent,
-    CreatePokemonComponent
+    CreatePokemonComponent,
+    PreviewCardComponent,
+    ListPokemonsComponent,
+    PokemonDialogComponent
   ],
   imports: [
+    MatDialogModule,
     MatFormFieldModule,
     MatSidenavModule,
     MatIconModule,
@@ -57,6 +65,7 @@ import { CreatePokemonComponent } from './components/create-pokemon/create-pokem
     AppRoutingModule
   ],
   providers: [HttpService,PokemonService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[PokemonDialogComponent]
 })
 export class AppModule { }
