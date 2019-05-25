@@ -3,7 +3,7 @@
 ## Introduction
 
 Ce projet a pour finalité de permettre à un utilisateur de trouver un pokémon, créer ses propres pokémons et pouvoir consulter tous les pokémons disponibles depuis la base de données PokéApi.
-Pour ce faire, différentes vues ont été crées.
+Pour ce faire, j'ai créé différentes vues et utilisé le framework de material desgin Angular Material.
 
 ## Partie 1 : Recherche de Pokémon
 
