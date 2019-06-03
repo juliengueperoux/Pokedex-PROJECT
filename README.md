@@ -32,5 +32,5 @@ Lorsque l'utilisateur clique sur un pokémon, cela ouvre une dialogue contenant 
 
 ## Conclusion
 
-Ce projet rassemble de nombreux aspects de la réalisation d'une IHM en Angular. Routing, services, composants génériques, binding sont de nombreux aspects abordés dans ce Projet.
+Ce projet rassemble de nombreux aspects de la réalisation d'une IHM en Angular. Routing, services, composants génériques, binding sont de nombreux aspects abordés dans ce projet.
 
