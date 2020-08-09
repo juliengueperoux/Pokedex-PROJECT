@@ -5,6 +5,6 @@
       style="margin-bottom: 2%" (click)="openCardDetails(pokemon)"></app-preview-card>
   </div>
   <div fxLayout="row" fxLayoutAlign="center" style="margin-bottom: 2%">
-    <button *ngIf="offset<=numberPokemons" mat-raised-button color="primary" (click)="addPokemons()">Load More</button>
+    <button *ngIf="offset<=numberPokemons" mat-raised-button color="primary" (click)="addPokemons()">{{"list.loadMore" | translate}}</button>
   </div>
 </div>

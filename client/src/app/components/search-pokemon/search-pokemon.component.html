@@ -1,14 +1,12 @@
-<form (ngSubmit)="submitPokemon()">
-    <div fxLayout='row' fxLayoutAlign="space-between center">
+<form (ngSubmit)="submitPokemon()" fxLayoutGap="5%" fxLayout="row" fxLayoutAlign="0 center">
   <mat-form-field fxFlex="60">
-        <input matInput placeholder="Pokemon ou Id" aria-label="Pokemon" [matAutocomplete]="auto"
-      [formControl]="pokemonCtrl">
+    <input matInput placeholder="{{'searchPokemon.pokemonNameOrId' | translate}}" aria-label="Pokemon"
+      [matAutocomplete]="auto" [formControl]="pokemonCtrl">
     <mat-autocomplete #auto="matAutocomplete">
       <mat-option *ngFor="let pokemon of filteredPokemons | async" [value]="pokemon.name">
         <span>{{pokemon.id+' | '+pokemon.name}}</span>
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
-  <button fxFlex="30" type="submit" mat-raised-button>validate</button>
-</div>
+  <button fxFlex="30" type="submit" mat-raised-button>{{"searchPokemon.validate" | translate}}</button>
 </form>

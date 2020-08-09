@@ -11,11 +11,11 @@ export class SearchComponent implements OnInit {
   constructor(private pokemonService: PokemonService) { }
 
   ngOnInit() {
-    this.resetPokemon()
+    this.resetPokemon();
   }
 
-  resetPokemon(){
-    this.pokemonService.changePokemon("")
+  resetPokemon() {
+    this.pokemonService.changePokemon('');
 }
 
 }

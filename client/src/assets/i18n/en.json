@@ -1,6 +1,38 @@
 {
-    "demo": {
-        "title": "Translation demo en",
-        "text": "This is a simple demonstration app for ngx-translate"
+    "app":{
+        "title" : "Pokedex"
+    },
+    "pokemonCaracteristics":{
+        "name" : "Name",
+        "types" : "Types",
+        "description": "Description",
+        "abilities" : "Abilities",
+        "hp": "HP",
+        "attack" : "Attack",
+        "defence" : "Defence",
+        "speed" : "Speed",
+        "specialAttack" : "Special-attack",
+        "specialDefence" : "Special-defence"
+    },
+    "createForm": {
+        "title" : "Create your own Pokemon",
+        "reset" : "Reset",
+        "generate" : "Generate",
+        "uploadImage" : "Upload image"
+    },
+    "common":{
+        "invalidForm" : "Invalid form"
+    },
+    "list":{
+        "loadMore" : "Load more"
+    },
+    "menu":{
+        "createPokemon" : "Create Pokemon",
+        "listPokemons" : "All Pokemons",
+        "searchPokemon" : "Search Pokemon"
+    },
+    "searchPokemon":{
+        "validate" : "validate",
+        "pokemonNameOrId" : "Pokemon name or Id" 
     }
 }

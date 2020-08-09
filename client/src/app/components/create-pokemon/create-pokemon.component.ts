@@ -12,16 +12,16 @@ import { FindValueSubscriber } from 'rxjs/internal/operators/find';
 })
 export class CreatePokemonComponent implements OnInit {
   imageUrl: any[];
-  filledCustomPokemon : boolean;
+  filledCustomPokemon: boolean;
   pokemonGroup: FormGroup;
-  customPokemon : Pokemon;
+  customPokemon: Pokemon;
   constructor(private _utils: UtilsService, private _formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    this.filledCustomPokemon = false
-    this.imageUrl=[]
+    this.filledCustomPokemon = false;
+    this.imageUrl = [];
     this.pokemonGroup = this._formBuilder.group({
-      inputAbilitiesControl:[],
+      inputAbilitiesControl: [],
       inputNameControl: [
         '',
         Validators.compose([
@@ -44,7 +44,7 @@ export class CreatePokemonComponent implements OnInit {
       inputHpControl: ['',
         Validators.compose([
           Validators.required,
-          Validators.pattern("^[0-9]*$"),
+          Validators.pattern('^[0-9]*$'),
           Validators.min(0),
           Validators.max(255)
         ])
@@ -52,7 +52,7 @@ export class CreatePokemonComponent implements OnInit {
       inputAttackControl: ['',
         Validators.compose([
           Validators.required,
-          Validators.pattern("^[0-9]*$"),
+          Validators.pattern('^[0-9]*$'),
           Validators.min(0),
           Validators.max(255)
         ])
@@ -60,7 +60,7 @@ export class CreatePokemonComponent implements OnInit {
       inputSpeedControl: ['',
         Validators.compose([
           Validators.required,
-          Validators.pattern("^[0-9]*$"),
+          Validators.pattern('^[0-9]*$'),
           Validators.min(0),
           Validators.max(255)
         ])
@@ -68,7 +68,7 @@ export class CreatePokemonComponent implements OnInit {
       inputSpeAttackControl: ['',
         Validators.compose([
           Validators.required,
-          Validators.pattern("^[0-9]*$"),
+          Validators.pattern('^[0-9]*$'),
           Validators.min(0),
           Validators.max(255)
         ])
@@ -76,7 +76,7 @@ export class CreatePokemonComponent implements OnInit {
       inputSpeDefenseControl: ['',
         Validators.compose([
           Validators.required,
-          Validators.pattern("^[0-9]*$"),
+          Validators.pattern('^[0-9]*$'),
           Validators.min(0),
           Validators.max(255)
         ])
@@ -84,59 +84,56 @@ export class CreatePokemonComponent implements OnInit {
       inputDefenseControl: ['',
         Validators.compose([
           Validators.required,
-          Validators.pattern("^[0-9]*$"),
+          Validators.pattern('^[0-9]*$'),
           Validators.min(0),
           Validators.max(255)
         ])
       ]
-    })
+    });
   }
   uploadImagePokemon(event: any) {
     if (event.target.files && event.target.files[0]) {
       if (event.target.files[0].type.includes('image/')) {
-        var reader = new FileReader();
+        const reader = new FileReader();
         reader.onload = (event: any) => {
           this.imageUrl = [event.target.result];
-        }
+        };
         reader.readAsDataURL(event.target.files[0]);
-      }
-      else {
-        this.imageUrl = ['']
-        this._utils.openSnackBar("Le fichier n'est pas une image", "Ok", "error-snackbar")
+      } else {
+        this.imageUrl = [''];
+        this._utils.openSnackBar('Le fichier n\'est pas une image', 'Ok', 'error-snackbar');
       }
     }
   }
-  createPokemon():void{
-    console.log("subbbmit "+this.pokemonGroup.valid)
-    if(this.pokemonGroup.valid){
-      if(this.imageUrl.length>0){
-        this.customPokemon = new Pokemon()
-        this.customPokemon.id = null
-            this.customPokemon.name = this.pokemonGroup.get('inputNameControl').value
-            this.customPokemon.abilities = this.pokemonGroup.get('inputAbilitiesControl').value
-            this.customPokemon.stats = [new Stat("speed",this.pokemonGroup.get('inputSpeedControl').value),new Stat("hp",this.pokemonGroup.get('inputHpControl').value),new Stat("attack",this.pokemonGroup.get('inputAttackControl').value),new Stat("defense",this.pokemonGroup.get('inputDefenseControl').value),new Stat("special-defense",this.pokemonGroup.get('inputSpeDefenseControl').value),new Stat("special-attack",this.pokemonGroup.get('inputSpeAttackControl').value)]
-            this.customPokemon.types = this.pokemonGroup.get('inputTypesControl').value
-            this.customPokemon.images = this.imageUrl
-            this.customPokemon.description = this.pokemonGroup.get('inputDescriptionControl').value
+  createPokemon(): void {
+    console.log('subbbmit ' + this.pokemonGroup.valid);
+    if (this.pokemonGroup.valid) {
+      if (this.imageUrl.length > 0) {
+        this.customPokemon = new Pokemon();
+        this.customPokemon.id = null;
+        this.customPokemon.name = this.pokemonGroup.get('inputNameControl').value;
+        this.customPokemon.abilities = this.pokemonGroup.get('inputAbilitiesControl').value;
+        this.customPokemon.stats = [new Stat('speed', this.pokemonGroup.get('inputSpeedControl').value), new Stat('hp', this.pokemonGroup.get('inputHpControl').value), new Stat('attack', this.pokemonGroup.get('inputAttackControl').value), new Stat('defense', this.pokemonGroup.get('inputDefenseControl').value), new Stat('special-defense', this.pokemonGroup.get('inputSpeDefenseControl').value), new Stat('special-attack', this.pokemonGroup.get('inputSpeAttackControl').value)];
+        this.customPokemon.types = this.pokemonGroup.get('inputTypesControl').value;
+        this.customPokemon.images = this.imageUrl;
+        this.customPokemon.description = this.pokemonGroup.get('inputDescriptionControl').value;
 
-      this.filledCustomPokemon = true
+        this.filledCustomPokemon = true;
+      } else {
+        this._utils.openSnackBar('Formulaire invalide', 'Ok', 'error-snackbar');
       }
-      else{
-        this._utils.openSnackBar("Formulaire invalide", "Ok", "error-snackbar")
-      }
-      }
-      else{
-        this._utils.openSnackBar("Formulaire invalide", "Ok", "error-snackbar")
+      } else {
+        this._utils.openSnackBar('Formulaire invalide', 'Ok', 'error-snackbar');
       }
     }
 
-    resetCustomPokemon(){
-      this.filledCustomPokemon = false
-      this.imageUrl = []
-      this.pokemonGroup.reset()
+    resetCustomPokemon() {
+      this.filledCustomPokemon = false;
+      this.imageUrl = [];
+      this.pokemonGroup.reset();
     }
 
-    openFileBrowser(){ 
-      document.getElementById("fileInput").click();
+    openFileBrowser() {
+      document.getElementById('fileInput').click();
     }
   }
