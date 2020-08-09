@@ -9,8 +9,8 @@ export class PreviewCardComponent implements OnInit {
   @Input() name: string;
   @Input() id: number;
   @Input() types: string[];
-  @Input() image : string;
-  
+  @Input() image: string;
+
   constructor() { }
 
   ngOnInit() {

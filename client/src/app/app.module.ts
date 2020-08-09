@@ -24,6 +24,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { SearchComponent } from './components/search/search.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import {TranslateModule} from '@ngx-translate/core';
 import { CreatePokemonComponent } from './components/create-pokemon/create-pokemon.component';
 import { PreviewCardComponent } from './components/preview-card/preview-card.component';
 import { ListPokemonsComponent } from './components/list-pokemons/list-pokemons.component';
@@ -62,7 +63,8 @@ import { PokemonDialogComponent } from './components/pokemon-dialog/pokemon-dial
     BrowserAnimationsModule,
     MatToolbarModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    TranslateModule.forRoot()
   ],
   providers: [HttpService,PokemonService],
   bootstrap: [AppComponent],

@@ -1,6 +1,6 @@
 <div fxLayout='column' fxFlex='80'>
   <div fxLayout="row" fxLayoutAlign="center" style="margin-bottom: 2%">
-    <button mat-raised-button fxFlex='30' fxFlex.lt-md="55" *ngIf="selectedPokemon" (click)="savePokemon()"
+    <button mat-raised-button fxFlex='30' fxFlex.lt-md="55" *ngIf="selectedPokemon && isCustomPokemon" (click)="savePokemon()"
       color="primary">Save this Pokemon ?</button>
   </div>
   <mat-card id="pokemonCard">
@@ -13,7 +13,7 @@
             <mat-card-subtitle>Types : {{selectedPokemon.types}}</mat-card-subtitle>
           </mat-card-header>
           <mat-card-content *ngIf="selectedPokemon.images.length>0" fxLayout="column" fxLayoutAlign="center center">
-            <p><img style="zoom: 2; max-width: 100%; max-height: 200px;" [src]="selectedPokemon.images[indexImage]"></p>
+            <p><img class="img-style" [src]="selectedPokemon.images[indexImage]"></p>
             <button mat-icon-button *ngIf="selectedPokemon.images.length>1" (click)="changeImage()">
               <mat-icon>loop</mat-icon>
             </button>
@@ -36,7 +36,7 @@
             <div fxLayout="row" *ngFor="let stat of selectedPokemon.stats">
               <mat-list-item>
                 <p fxFlex="50">{{stat.name}} :</p>
-                <p fxFlex="10" style="text-align:right">{{stat.value}}</p>
+                <p fxFlex="10" class="stat-value">{{stat.value}}</p>
                 <mat-progress-bar fxFlex="40" style='height: 30%' mode="determinate" [value]="(stat.value/255)*100"
                   [ngClass]="barColor(stat.value)"></mat-progress-bar>
               </mat-list-item>

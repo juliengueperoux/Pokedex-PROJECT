@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import 'hammerjs';
+import { TranslationService } from '../../services/translation/translation.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,4 +9,7 @@ import 'hammerjs';
 })
 export class AppComponent {
   title = 'client';
+  constructor(private translationService: TranslationService) {
+    this.translationService.init();
+}
 }
