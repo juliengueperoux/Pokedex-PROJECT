@@ -6,17 +6,17 @@
 
     <mat-nav-list>
       <mat-divider></mat-divider>
-      <a mat-list-item  [routerLink]="'/search'">
+      <a mat-list-item  [routerLink]="'/search'" routerLinkActive="active">
         <mat-icon style="margin-right: 5px">search</mat-icon>
         {{'menu.searchPokemon' | translate}}
       </a>
       <mat-divider></mat-divider>
-      <a mat-list-item [routerLink]="'/create'" >
+      <a mat-list-item [routerLink]="'/create'" routerLinkActive="active">
         <mat-icon style="margin-right: 5px">create</mat-icon>
         {{'menu.createPokemon' | translate}}
       </a>
       <mat-divider></mat-divider>
-      <a mat-list-item [routerLink]="'/list'" >
+      <a mat-list-item [routerLink]="'/list'" routerLinkActive="active">
         <mat-icon style="margin-right: 5px">list</mat-icon>
         {{'menu.listPokemons' | translate}}
       </a>

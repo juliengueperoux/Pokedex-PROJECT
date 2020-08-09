@@ -12,12 +12,11 @@ export class SidebarComponent implements OnInit {
   @ViewChildren('drawer') sc: QueryList<MatSidenavModule>;
   constructor(private breakpointObserver: BreakpointObserver) { }
 
-  ngOnInit() {
-  }
-
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)
     );
 
+  ngOnInit() {
+  }
 }
