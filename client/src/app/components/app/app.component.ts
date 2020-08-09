@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import 'hammerjs';
 import { TranslationService } from '../../services/translation/translation.service';
 
 @Component({

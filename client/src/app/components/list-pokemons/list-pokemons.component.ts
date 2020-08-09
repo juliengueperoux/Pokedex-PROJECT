@@ -3,7 +3,7 @@ import { Pokemon } from 'src/app/models/pokemon';
 import { HttpService } from 'src/app/services/httpService/http.service';
 import { forkJoin } from 'rxjs';
 import { Stat } from 'src/app/models/stat';
-import {MatDialog, MatDialogConfig} from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { PokemonDialogComponent } from '../pokemon-dialog/pokemon-dialog.component';
 import { TouchSequence } from 'selenium-webdriver';
 

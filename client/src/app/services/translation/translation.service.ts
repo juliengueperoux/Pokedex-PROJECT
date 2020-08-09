@@ -32,7 +32,7 @@ export class TranslationService {
 
         // Change window title
         this.translateService
-            .get('app.title')
+            .get('demo.title')
             .subscribe((translation: string) =>
                 this.titleService.setTitle(translation)
             );

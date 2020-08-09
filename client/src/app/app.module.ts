@@ -11,7 +11,7 @@ import { SearchPokemonComponent } from './components/search-pokemon/search-pokem
 import {MatCardModule} from '@angular/material/card';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
-import { HttpClientModule } from '@angular/common/http';
+import {HttpClient, HttpClientModule } from '@angular/common/http';
 import { HttpService } from './services/httpService/http.service';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { PokemonService } from './services/pokemonService/pokemon.service';
@@ -24,12 +24,18 @@ import {MatIconModule} from '@angular/material/icon';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { SearchComponent } from './components/search/search.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
-import {TranslateModule} from '@ngx-translate/core';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { CreatePokemonComponent } from './components/create-pokemon/create-pokemon.component';
 import { PreviewCardComponent } from './components/preview-card/preview-card.component';
 import { ListPokemonsComponent } from './components/list-pokemons/list-pokemons.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { PokemonDialogComponent } from './components/pokemon-dialog/pokemon-dialog.component';
+
+// required for AOT compilation
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
@@ -64,8 +70,14 @@ import { PokemonDialogComponent } from './components/pokemon-dialog/pokemon-dial
     MatToolbarModule,
     BrowserModule,
     AppRoutingModule,
-    TranslateModule.forRoot()
-  ],
+    TranslateModule.forRoot({
+      loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient]
+      }
+  })
+],
   providers: [HttpService,PokemonService],
   bootstrap: [AppComponent],
   entryComponents:[PokemonDialogComponent]
