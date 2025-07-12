@@ -3,9 +3,10 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Pokemon } from 'src/app/models/pokemon';
 
 @Component({
-  selector: 'app-pokemon-dialog',
-  templateUrl: './pokemon-dialog.component.html',
-  styleUrls: ['./pokemon-dialog.component.css']
+    selector: 'app-pokemon-dialog',
+    templateUrl: './pokemon-dialog.component.html',
+    styleUrls: ['./pokemon-dialog.component.css'],
+    standalone: false
 })
 export class PokemonDialogComponent implements OnInit {
 

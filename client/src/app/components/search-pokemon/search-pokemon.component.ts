@@ -6,9 +6,10 @@ import { Observable } from 'rxjs';
 import { Pokemon } from 'src/app/models/pokemon';
 
 @Component({
-  selector: 'app-search-pokemon',
-  templateUrl: './search-pokemon.component.html',
-  styleUrls: ['./search-pokemon.component.css']
+    selector: 'app-search-pokemon',
+    templateUrl: './search-pokemon.component.html',
+    styleUrls: ['./search-pokemon.component.css'],
+    standalone: false
 })
 export class SearchPokemonComponent implements OnInit {
 

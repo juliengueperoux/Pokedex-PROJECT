@@ -8,9 +8,10 @@ import { PokemonDialogComponent } from '../pokemon-dialog/pokemon-dialog.compone
 import { TouchSequence } from 'selenium-webdriver';
 
 @Component({
-  selector: 'app-list-pokemons',
-  templateUrl: './list-pokemons.component.html',
-  styleUrls: ['./list-pokemons.component.css']
+    selector: 'app-list-pokemons',
+    templateUrl: './list-pokemons.component.html',
+    styleUrls: ['./list-pokemons.component.css'],
+    standalone: false
 })
 export class ListPokemonsComponent implements OnInit {
   numberPokemons = 964;

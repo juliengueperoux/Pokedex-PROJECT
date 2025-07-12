@@ -6,9 +6,10 @@ import { Stat } from 'src/app/models/stat';
 import { UtilsService } from '../../services/utilsService/utils.service';
 import domtoimage from 'dom-to-image';
 @Component({
-  selector: 'app-preview-infos',
-  templateUrl: './preview-infos.component.html',
-  styleUrls: ['./preview-infos.component.css']
+    selector: 'app-preview-infos',
+    templateUrl: './preview-infos.component.html',
+    styleUrls: ['./preview-infos.component.css'],
+    standalone: false
 })
 export class PreviewInfosComponent implements OnInit {
   @Input() defaultpokemon: Pokemon;

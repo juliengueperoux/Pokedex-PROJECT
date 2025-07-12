@@ -6,9 +6,10 @@ import { Stat } from 'src/app/models/stat';
 import { FindValueSubscriber } from 'rxjs/internal/operators/find';
 
 @Component({
-  selector: 'app-create-pokemon',
-  templateUrl: './create-pokemon.component.html',
-  styleUrls: ['./create-pokemon.component.css']
+    selector: 'app-create-pokemon',
+    templateUrl: './create-pokemon.component.html',
+    styleUrls: ['./create-pokemon.component.css'],
+    standalone: false
 })
 export class CreatePokemonComponent implements OnInit {
   imageUrl: any[];
