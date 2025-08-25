@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { forkJoin, Observable, of } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 import type { Resource, ResourceMap } from "../types";
 import { ApiResourceList } from "../types/ApiResouceList";
 import { NamedAPIResource } from '../types/utility';
@@ -41,14 +41,17 @@ export class ApiService {
     return this.http.get<Pokemon>(url);
   }
 
-  getPokemonDetailsList(): Observable<Pokemon[]> {
-    return this.fetchListResource<NamedAPIResource>('pokemon', 20, 0).pipe(
+  getPokemonDetailsList(page: number = 1, limit: number = 20): Observable<{pokemons: Pokemon[], count: number}> {
+    const offset = (page - 1) * limit;
+    return this.fetchListResource<NamedAPIResource>('pokemon', limit, offset).pipe(
       switchMap(response => {
         if (!response.results.length) {
-          return of([]);
+          return of({ pokemons: [], count: response.count });
         }
         const detailRequests = response.results.map(p => this.fetchPokemonDetailsByUrl(p.url));
-        return forkJoin(detailRequests);
+        return forkJoin(detailRequests).pipe(
+          map(pokemons => ({ pokemons, count: response.count }))
+        );
       })
     );
   }

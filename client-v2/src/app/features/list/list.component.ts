@@ -1,8 +1,11 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ApiService } from '../../services/api.service';
 import { CardComponent } from './card/card.component';
+import { ActivatedRoute, Router } from '@angular/router';
+import { map, switchMap } from 'rxjs/operators';
 import { JsonPipe } from '@angular/common';
+import { PaginationComponent } from '../../shared/components/pagination/pagination.component';
 
 @Component({
   selector: 'app-list',
@@ -10,10 +13,31 @@ import { JsonPipe } from '@angular/common';
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [JsonPipe, CardComponent]
+  imports: [JsonPipe, CardComponent, PaginationComponent]
 })
 export class ListComponent {
   private apiService = inject(ApiService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
 
-  listPokemons = toSignal(this.apiService.getPokemonDetailsList());
+  private readonly limit = 20;
+
+  page = toSignal(this.route.queryParamMap.pipe(
+    map(params => +(params.get('page') || 1))
+  ), { initialValue: 1 });
+
+  private pokemonsResponse$ = this.route.queryParamMap.pipe(
+    map(params => +(params.get('page') || 1)),
+    switchMap(page => this.apiService.getPokemonDetailsList(page, this.limit))
+  );
+
+  private pokemonsResponse = toSignal(this.pokemonsResponse$);
+
+  listPokemons = computed(() => this.pokemonsResponse()?.pokemons);
+  count = computed(() => this.pokemonsResponse()?.count);
+  totalPages = computed(() => Math.ceil((this.count() || 0) / this.limit));
+
+  onPageChange(newPage: number) {
+    this.router.navigate([], { queryParams: { page: newPage }, queryParamsHandling: 'merge' });
+  }
 }

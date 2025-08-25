@@ -1,11 +1,20 @@
-.pokemon-list {
+.list-page {
     display: flex;
-    flex-flow: row wrap;
-    gap: 16px;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 32px;
+    
+    .pokemon-list {
+        display: flex;
+        flex-flow: row wrap;
+        gap: 16px;
+        justify-content: center;
 
-    app-card {
-        max-width: 300px;
-        width: 100%;
+        app-card {
+            max-width: 300px;
+            width: 100%;
+        }
     }
 }
