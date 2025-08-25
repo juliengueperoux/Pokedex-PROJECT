@@ -1,0 +1,7 @@
+<mat-nav-list>
+  @for (link of navLinks(); track link.path) {
+    <a mat-list-item [routerLink]="link.path" (click)="onLinkClicked()">
+      {{ link.label }}
+    </a>
+  }
+</mat-nav-list>

@@ -1,0 +1,11 @@
+<h1>Liste des Pokémons</h1>
+
+@if (listPokemons(); as pokemons) {
+  <div class="pokemon-list">
+    @for (pokemon of pokemons; track pokemon.id) {
+      <app-card [pokemon]="pokemon"></app-card>
+    }
+  </div>
+} @else {
+  <p>Chargement...</p>
+}

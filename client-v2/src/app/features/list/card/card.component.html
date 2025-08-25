@@ -1,0 +1,13 @@
+@if (pokemon(); as p) {
+  <mat-card class="scrollable-content">
+    <mat-card-header>
+      <mat-card-title>#{{p.id}} {{p.name}}</mat-card-title>
+      <mat-card-subtitle>{{ pokemonTypes() }}</mat-card-subtitle>
+    </mat-card-header>
+    @if(p.sprites.front_default){
+    <mat-card-content>
+      <img mat-card-image [src]="p.sprites.front_default" [alt]="p.name">
+    </mat-card-content>
+    }
+  </mat-card>
+}

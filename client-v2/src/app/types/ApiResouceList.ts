@@ -1,6 +1,4 @@
-import { ResourceMap } from ".";
-
-export type ApiResourceList<T extends ResourceMap> = {
+export type ApiResourceList<T> = {
     count: number;
     next: string;
     previous: string;

@@ -1,0 +1,16 @@
+<mat-toolbar color="primary">
+  @if (mobileService.isMobile()) {
+    <button mat-icon-button (click)="onToggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  }
+  <a [routerLink]="['/']" class="home-link">Pokedex</a>
+  <div class="spacer"></div>
+  @if (!mobileService.isMobile()) {
+    <div>
+      @for (link of navLinks(); track link.path) {
+        <a mat-button [routerLink]="link.path">{{ link.label }}</a>
+      }
+    </div>
+  }
+</mat-toolbar>

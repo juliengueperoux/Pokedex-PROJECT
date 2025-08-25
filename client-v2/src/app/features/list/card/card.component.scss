@@ -1,0 +1,8 @@
+mat-card{
+    width: 100%;
+    cursor: pointer;
+    
+    &:hover{
+        background-color: lightgrey;
+    }
+}
