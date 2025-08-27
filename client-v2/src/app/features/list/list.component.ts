@@ -4,7 +4,6 @@ import { ApiService } from '../../services/api.service';
 import { CardComponent } from './card/card.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map, switchMap } from 'rxjs/operators';
-import { JsonPipe } from '@angular/common';
 import { PaginationComponent } from '../../shared/components/pagination/pagination.component';
 
 @Component({
@@ -13,7 +12,7 @@ import { PaginationComponent } from '../../shared/components/pagination/paginati
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [JsonPipe, CardComponent, PaginationComponent]
+  imports: [CardComponent, PaginationComponent]
 })
 export class ListComponent {
   private apiService = inject(ApiService);
@@ -22,11 +21,11 @@ export class ListComponent {
 
   private readonly limit = 20;
 
-  page = toSignal(this.route.queryParamMap.pipe(
+  page = toSignal(this.route.paramMap.pipe(
     map(params => +(params.get('page') || 1))
   ), { initialValue: 1 });
 
-  private pokemonsResponse$ = this.route.queryParamMap.pipe(
+  private pokemonsResponse$ = this.route.paramMap.pipe(
     map(params => +(params.get('page') || 1)),
     switchMap(page => this.apiService.getPokemonDetailsList(page, this.limit))
   );
@@ -38,6 +37,6 @@ export class ListComponent {
   totalPages = computed(() => Math.ceil((this.count() || 0) / this.limit));
 
   onPageChange(newPage: number) {
-    this.router.navigate([], { queryParams: { page: newPage }, queryParamsHandling: 'merge' });
+    this.router.navigate(['/list', newPage]);
   }
 }
