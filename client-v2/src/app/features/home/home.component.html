@@ -1,1 +1,44 @@
-saluuut
+<div class="home-container">
+  <div class="hero">
+    <h1>Bienvenue sur le Pokédex !</h1>
+    <p>Votre guide ultime pour le monde des Pokémon.</p>
+    
+    <div class="search-container">
+      <mat-form-field appearance="outline" class="search-field">
+        <mat-label>Rechercher un Pokémon</mat-label>
+        <input matInput placeholder="Ex: Pikachu" [matAutocomplete]="auto" [formControl]="pokemonControl">
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="goToPokemon($event.option.value)">
+          @for (pokemon of filteredPokemons$ | async; track pokemon.name) {
+            <mat-option [value]="pokemon.name">{{pokemon.name | titlecase}}</mat-option>
+          }
+        </mat-autocomplete>
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <button mat-raised-button color="primary" routerLink="/list/1" class="browse-button">
+      Parcourir tous les Pokémon
+    </button>
+  </div>
+
+  <div class="featured-pokemon">
+    <h2>Pokémon à la une</h2>
+    @if (featuredPokemon$ | async) {
+        <div class="cards-container">
+            @for (pokemon of featuredPokemon$ | async; track pokemon.name) {
+            <mat-card>
+                <mat-card-header>
+                <mat-card-title>{{ pokemon.name | titlecase }}</mat-card-title>
+                </mat-card-header>
+                <img mat-card-image [src]="pokemon.imageUrl" [alt]="pokemon.name">
+                <mat-card-content>
+                <p>
+                    {{ pokemon.description }}
+                </p>
+                </mat-card-content> 
+            </mat-card>
+        }
+        </div>
+    }
+  </div>
+</div>

@@ -35,6 +35,5 @@ export class App {
   readonly navLinks = [
     { path: '/list', label: 'List' },
     { path: '/pokemon', label: 'Pokemon' },
-    { path: '/search', label: 'Search' },
   ];
 }

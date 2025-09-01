@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { forkJoin, Observable, of } from 'rxjs';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { map, shareReplay, switchMap, tap } from 'rxjs/operators';
 import type { Resource, ResourceMap } from "../types";
 import { ApiResourceList } from "../types/ApiResouceList";
 import { NamedAPIResource } from '../types/utility';
@@ -14,6 +14,7 @@ export const BASE_URI = "https://pokeapi.co/api/v2";
 })
 export class ApiService {
   private http = inject(HttpClient);
+  private allPokemonNames$: Observable<NamedAPIResource[]> | undefined;
 
   fetchResource<R extends Resource>(param: string | number, resource: R): Observable<ResourceMap[R]> {
     const _param = typeof param === "string" ? param.toLowerCase() : param;
@@ -37,11 +38,15 @@ export class ApiService {
     );
   }
 
-  fetchPokemonDetailsByUrl(url: string): Observable<Pokemon> {
-    return this.http.get<Pokemon>(url);
+  fetchByUrl<T>(url: string): Observable<T> {
+    return this.http.get<T>(url);
   }
 
-  getPokemonDetailsList(page: number = 1, limit: number = 20): Observable<{pokemons: Pokemon[], count: number}> {
+  fetchPokemonDetailsByUrl(url: string): Observable<Pokemon> {
+    return this.fetchByUrl<Pokemon>(url);
+  }
+
+  getPokemonDetailsList(page: number = 1, limit: number = 20): Observable<{ pokemons: Pokemon[], count: number }> {
     const offset = (page - 1) * limit;
     return this.fetchListResource<NamedAPIResource>('pokemon', limit, offset).pipe(
       switchMap(response => {
@@ -62,5 +67,15 @@ export class ApiService {
 
   private _isListValid(data: any): boolean {
     return "results" in data;
+  }
+
+  getAllPokemonNames(): Observable<NamedAPIResource[]> {
+    if (!this.allPokemonNames$) {
+      this.allPokemonNames$ = this.fetchListResource<NamedAPIResource>('pokemon', 2000, 0).pipe(
+        map(response => response.results),
+        shareReplay(1)
+      );
+    }
+    return this.allPokemonNames$;
   }
 }

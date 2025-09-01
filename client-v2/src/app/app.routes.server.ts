@@ -5,6 +5,10 @@ import { firstValueFrom } from 'rxjs';
 
 export const serverRoutes: ServerRoute[] = [
   {
+    path: '',
+    renderMode: RenderMode.Prerender,
+  },
+  {
     path: 'list/:page',
     renderMode: RenderMode.Prerender,
     async getPrerenderParams() {
