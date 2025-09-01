@@ -2,18 +2,18 @@
 
 <div class="list-page">
 @if (listPokemons(); as pokemons) {
-  <app-pagination 
+  <pokedex-pagination 
     [currentPage]="page()" 
     [totalPages]="totalPages()" 
     (pageChange)="onPageChange($event)" />
 
   <div class="pokemon-list">
     @for (pokemon of pokemons; track pokemon.id) {
-      <app-card [pokemon]="pokemon"></app-card>
+      <pokemon-card [pokemon]="pokemon"></pokemon-card>
     }
   </div>
 
-  <app-pagination 
+  <pokedex-pagination 
     [currentPage]="page()" 
     [totalPages]="totalPages()" 
     (pageChange)="onPageChange($event)" />

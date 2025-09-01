@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 import { MatListModule } from '@angular/material/list';
 
 @Component({
-  selector: 'app-sidenav',
+  selector: 'pokedex-sidenav',
   standalone: true,
   imports: [RouterModule, MatListModule],
   templateUrl: './sidenav.component.html',

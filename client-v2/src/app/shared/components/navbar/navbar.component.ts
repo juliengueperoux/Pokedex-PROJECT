@@ -6,7 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MobileDetectionService } from '../../../services/utils/mobile-detection.service';
 
 @Component({
-  selector: 'app-navbar',
+  selector: 'pokedex-navbar',
   standalone: true,
   imports: [RouterModule, MatToolbarModule, MatButtonModule, MatIconModule],
   templateUrl: './navbar.component.html',

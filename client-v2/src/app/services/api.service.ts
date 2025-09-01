@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { forkJoin, Observable, of } from 'rxjs';
-import { map, shareReplay, switchMap, tap } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 import type { Resource, ResourceMap } from "../types";
 import { ApiResourceList } from "../types/ApiResouceList";
 import { NamedAPIResource } from '../types/utility';
@@ -9,12 +9,16 @@ import { Pokemon } from '../types/pokemon';
 
 export const BASE_URI = "https://pokeapi.co/api/v2";
 
+export interface PokemonName {
+  fr: string;
+  en: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
   private http = inject(HttpClient);
-  private allPokemonNames$: Observable<NamedAPIResource[]> | undefined;
 
   fetchResource<R extends Resource>(param: string | number, resource: R): Observable<ResourceMap[R]> {
     const _param = typeof param === "string" ? param.toLowerCase() : param;
@@ -69,13 +73,7 @@ export class ApiService {
     return "results" in data;
   }
 
-  getAllPokemonNames(): Observable<NamedAPIResource[]> {
-    if (!this.allPokemonNames$) {
-      this.allPokemonNames$ = this.fetchListResource<NamedAPIResource>('pokemon', 2000, 0).pipe(
-        map(response => response.results),
-        shareReplay(1)
-      );
-    }
-    return this.allPokemonNames$;
+  getPokemonNames(): Observable<PokemonName[]> {
+    return this.http.get<PokemonName[]>('pokemon-names.json');
   }
 }

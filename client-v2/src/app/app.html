@@ -1,10 +1,10 @@
 <mat-sidenav-container class="app-container">
   <mat-sidenav #sidenav [mode]="mobileService.isMobile() ? 'over' : 'side'">
-    <app-sidenav [navLinks]="navLinks" (linkClicked)="mobileService.isMobile() ? sidenav.close() : null" />
+    <pokedex-sidenav [navLinks]="navLinks" (linkClicked)="mobileService.isMobile() ? sidenav.close() : null" />
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <app-navbar [navLinks]="navLinks" (toggleSidenav)="sidenav.toggle()" />
+    <pokedex-navbar [navLinks]="navLinks" (toggleSidenav)="sidenav.toggle()" />
     <main class="app-content">
       <router-outlet />
     </main>

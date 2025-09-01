@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, input, Output } from 
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'app-pagination',
+  selector: 'pokedex-pagination',
   standalone: true,
   templateUrl: './pagination.component.html',
   styleUrl: './pagination.component.scss',

@@ -3,7 +3,7 @@ import { MatCardModule } from '@angular/material/card';
 import { Pokemon } from '../../../types/pokemon';
 
 @Component({
-  selector: 'app-card',
+  selector: 'pokemon-card',
   standalone: true,
   templateUrl: './card.component.html',
   styleUrl: './card.component.scss',

@@ -5,13 +5,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterLink } from '@angular/router';
-import { ApiService } from '../../services/api.service';
+import { ApiService, PokemonName } from '../../services/api.service';
 import { forkJoin, map, Observable, startWith, switchMap } from 'rxjs';
 import { PokemonSpecies } from '../../types/pokemon';
 import { AsyncPipe, TitleCasePipe } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { NamedAPIResource } from '../../types/utility';
 
 export interface FeaturedPokemon {
   name: string;
@@ -44,9 +43,9 @@ export class HomeComponent implements OnInit {
 
   featuredPokemon$!: Observable<FeaturedPokemon[]>;
 
-  pokemonControl = new FormControl('');
-  allPokemons: NamedAPIResource[] = [];
-  filteredPokemons$!: Observable<NamedAPIResource[]>;
+  pokemonControl = new FormControl<string | PokemonName>('');
+  allPokemons: PokemonName[] = [];
+  filteredPokemons$!: Observable<PokemonName[]>;
 
   ngOnInit(): void {
     const pokemonIds = [1, 4, 7];
@@ -71,22 +70,32 @@ export class HomeComponent implements OnInit {
       )
     );
 
-    this.apiService.getAllPokemonNames().subscribe(pokemons => {
+    this.apiService.getPokemonNames().subscribe(pokemons => {
       this.allPokemons = pokemons;
     });
 
     this.filteredPokemons$ = this.pokemonControl.valueChanges.pipe(
       startWith(''),
-      map(value => this._filter(value || '')),
+      map(value => {
+        const name = typeof value === 'string' ? value : value?.fr;
+        return name ? this._filter(name) : this.allPokemons.slice();
+      }),
     );
   }
 
-  private _filter(value: string): NamedAPIResource[] {
-    const filterValue = value.toLowerCase();
-    return this.allPokemons.filter(pokemon => pokemon.name.toLowerCase().includes(filterValue));
+  displayFn(pokemon: PokemonName): string {
+    return pokemon && pokemon.fr ? pokemon.fr : '';
   }
 
-  goToPokemon(pokemonName: string): void {
-    this.router.navigate(['/pokemon', pokemonName]);
+  private _filter(value: string): PokemonName[] {
+    const filterValue = value.toLowerCase();
+    return this.allPokemons.filter(pokemon => pokemon.fr.toLowerCase().includes(filterValue));
+  }
+
+  goToPokemon(): void {
+    const pokemon = this.pokemonControl.value;
+    if (typeof pokemon === 'object' && pokemon !== null) {
+      this.router.navigate(['/pokemon', pokemon.en.toLowerCase()]);
+    }
   }
 }

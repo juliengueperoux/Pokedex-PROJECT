@@ -7,9 +7,9 @@
       <mat-form-field appearance="outline" class="search-field">
         <mat-label>Rechercher un Pokémon</mat-label>
         <input matInput placeholder="Ex: Pikachu" [matAutocomplete]="auto" [formControl]="pokemonControl">
-        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="goToPokemon($event.option.value)">
-          @for (pokemon of filteredPokemons$ | async; track pokemon.name) {
-            <mat-option [value]="pokemon.name">{{pokemon.name | titlecase}}</mat-option>
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="goToPokemon()">
+          @for (pokemon of filteredPokemons$ | async; track pokemon.fr) {
+            <mat-option [value]="pokemon">{{pokemon.fr | titlecase}}</mat-option>
           }
         </mat-autocomplete>
         <mat-icon matSuffix>search</mat-icon>
