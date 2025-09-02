@@ -1,30 +1,30 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
+import { map, switchMap } from 'rxjs/operators';
 import { ApiService } from '../../services/api.service';
-import { Pokemon } from '../../types/pokemon';
-import { Observable } from 'rxjs';
-import { AsyncPipe, JsonPipe } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-pokemon',
   standalone: true,
-  imports: [AsyncPipe, JsonPipe],
-  template: `
-    @if (pokemon$ | async; as pokemon) {
-      <pre>{{ pokemon | json }}</pre>
-    }
-  `,
+  templateUrl: './pokemon.component.html',
+  styleUrls: ['./pokemon.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [MatCardModule, MatChipsModule, CommonModule],
 })
-export class PokemonComponent implements OnInit {
+export class PokemonComponent {
   private route = inject(ActivatedRoute);
   private apiService = inject(ApiService);
 
-  pokemon$!: Observable<Pokemon>;
+  private pokemon$ = this.route.paramMap.pipe(
+    map(params => params.get('name')!),
+    switchMap(name => this.apiService.getPokemonDetailsByName(name))
+  );
 
-  ngOnInit(): void {
-    const pokemonName = this.route.snapshot.paramMap.get('name');
-    if (pokemonName) {
-      this.pokemon$ = this.apiService.fetchResource(pokemonName, 'pokemon');
-    }
-  }
+  pokemon = toSignal(this.pokemon$);
+
+  pokemonTypes = computed(() => this.pokemon()?.types.map(t => (t.type as any).name_fr));
 }

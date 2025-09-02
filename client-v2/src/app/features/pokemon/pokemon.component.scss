@@ -1,0 +1,20 @@
+.pokemon-container {
+  padding: 20px;
+}
+
+.pokemon-layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 20px;
+}
+
+.pokemon-image img {
+  width: 100%;
+  image-rendering: pixelated;
+}
+
+@media (max-width: 768px) {
+  .pokemon-layout {
+    grid-template-columns: 1fr;
+  }
+}

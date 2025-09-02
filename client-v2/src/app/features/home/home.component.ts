@@ -6,8 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterLink } from '@angular/router';
 import { ApiService, PokemonName } from '../../services/api.service';
-import { forkJoin, map, Observable, startWith, switchMap } from 'rxjs';
-import { PokemonSpecies } from '../../types/pokemon';
+import { forkJoin, map, Observable, startWith } from 'rxjs';
 import { AsyncPipe, TitleCasePipe } from '@angular/common';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -51,23 +50,22 @@ export class HomeComponent implements OnInit {
     const pokemonIds = [1, 4, 7];
 
     this.featuredPokemon$ = forkJoin(
-      pokemonIds.map(id =>
-        this.apiService.fetchResource(id, 'pokemon').pipe(
-          switchMap(pokemon =>
-            this.apiService.fetchByUrl<PokemonSpecies>(pokemon.species.url).pipe(
-              map(species => {
-                const frenchName = species.names.find((name) => name.language.name === "fr")?.name;
-                const frenchDescription = species.flavor_text_entries.find(entry => entry.language.name === 'fr');
-                return {
-                  name: frenchName ?? "",
-                  imageUrl: pokemon.sprites.other?.['official-artwork']?.["front_default"] ?? '',
-                  description: frenchDescription?.flavor_text.replace(/\f/g, ' ').replace(/\n/g, ' ') ?? 'Description not available.'
-                } as FeaturedPokemon;
-              })
-            )
-          )
-        )
-      )
+      pokemonIds.map(id => this.apiService.getPokemonDetailsById(id).pipe(
+        map(pokemon => {
+          if (!pokemon) {
+            return {
+              name: 'Not Found',
+              imageUrl: '',
+              description: ''
+            };
+          }
+          return {
+            name: pokemon.name,
+            imageUrl: pokemon.sprites['front_default'] ?? '',
+            description: pokemon.description.replace(/\f/g, ' ').replace(/\n/g, ' ')
+          } as FeaturedPokemon;
+        })
+      ))
     );
 
     this.apiService.getPokemonNames().subscribe(pokemons => {

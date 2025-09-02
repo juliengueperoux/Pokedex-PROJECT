@@ -1,8 +1,8 @@
 @if (pokemon(); as p) {
-  <mat-card class="scrollable-content">
+  <mat-card class="scrollable-content" (click)="navigateToDetails()">
     <mat-card-header>
       <mat-card-title>#{{p.id}} {{p.name}}</mat-card-title>
-      <mat-card-subtitle>{{ pokemonTypes() }}</mat-card-subtitle>
+      <mat-card-subtitle>{{ pokemonTypes()?.join(', ') }}</mat-card-subtitle>
     </mat-card-header>
     @if(p.sprites.front_default){
     <mat-card-content>

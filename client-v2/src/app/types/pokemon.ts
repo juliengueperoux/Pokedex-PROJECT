@@ -179,6 +179,8 @@ export interface NaturePokeathlonStatAffect {
 }
 
 export interface Pokemon {
+    description: string;
+    name_en: string;
     /** The identifier for this resource. */
     id: number;
     /** The name for this resource. */

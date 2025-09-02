@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "serve:ssr:client-v2": "node dist/client-v2/server/server.mjs",
-    "prebuild": "node scripts/download-pokemon-names.js"
+    "generate-data": "node scripts/generate-pokemon-data.js",
+    "prebuild": "npm run generate-data"
   },
   "prettier": {
     "overrides": [

@@ -1,0 +1,22 @@
+<div class="pokemon-container">
+  @if (pokemon(); as p) {
+    <div class="pokemon-layout">
+      <div class="pokemon-image">
+        <img [src]="p.sprites.front_default" [alt]="p.name">
+      </div>
+      <div class="pokemon-details">
+        <h1>#{{p.id}} {{p.name}}</h1>
+        <h2>Types</h2>
+        <mat-chip-listbox>
+          @for (type of pokemonTypes(); track type) {
+            <mat-chip>{{type}}</mat-chip>
+          }
+        </mat-chip-listbox>
+        <h2>Description</h2>
+        <p>{{ p.description }}</p>
+      </div>
+    </div>
+  } @else {
+    <p>Chargement...</p>
+  }
+</div>
